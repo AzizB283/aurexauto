@@ -1,0 +1,362 @@
+Overall Visual Style
+Theme
+
+Dark theme
+
+Background: deep charcoal / near-black (#0B0F14 or #0E0E12)
+
+Cards + sections: slightly lighter dark (#141823)
+
+Accent Colors
+
+Choose ONE primary accent, one secondary:
+
+Option A (Premium / Tech)
+
+Primary: Electric Purple (#8A5CFF or #9B6CFF)
+
+Secondary for highlights: Neon Blue (#3DDCFF)
+
+Option B (Bold / Confident)
+
+Primary: Warm Orange (#FF8A3D or #FF7A2E)
+
+Secondary: Yellow-Gold (#FFC947)
+
+Typography
+
+Headline: Poppins / Inter / Space Grotesk
+
+Body: Inter / DM Sans
+
+Code-style micro text & AI feel: JetBrains Mono (light use)
+
+White text tone:
+
+Main text: soft white (#E6E9EF)
+
+Secondary text: gray (#9AA0AE)
+
+Dividers: transparent white lines.
+
+Animation Style
+
+Minimal, smooth — nothing flashy
+
+Micro scroll fade-ins
+
+Parallax gradients
+
+Floating particle glow behind Hero text
+
+Button hover: subtle glow + scale
+
+🏠 HERO SECTION (Above the fold)
+Visual
+
+Dark gradient background
+
+Soft animated glow behind text
+
+Subtle AI pattern (dots, waves, neural mesh)
+
+One visual mockup: chat + dashboard + voice call UI layered
+
+Copy
+
+Tagline
+
+Automate. Assist. Accelerate.
+
+Main Headline
+
+Build AI systems that work for your business — 24/7.
+
+Supporting Line
+
+We design AI chatbots, voice assistants, automations, and dashboards that save time, cut costs, and convert more customers.
+
+Primary CTA
+
+Get a Free Consultation
+
+Secondary: See Live Demo
+
+Small trust text under button:
+
+No spam. Just ideas + strategy.
+
+🔎 “Trusted By / Problem Statement” Strip
+
+Dark strip with 3 problem statements, icon-based:
+
+✔ Missed customer calls
+✔ Manual booking headaches
+✔ Repetitive admin work
+
+Short line:
+
+If your team is doing it manually, we automate it.
+
+🤖 SERVICES SECTION (Cards)
+
+Title:
+
+What We Build
+
+Grid of premium cards (glow hover):
+
+1️⃣ AI Automation Systems
+
+Automate repetitive tasks across tools — no human needed.
+
+Booking & reservations
+
+Lead qualification
+
+Customer support
+
+Payment + CRM sync
+
+Workflow triggers & alerts
+
+Badge: Most Popular
+
+2️⃣ AI Chatbots & Voice Assistants
+
+Smart assistants that talk, understand, and convert.
+
+WhatsApp / Website chatbot
+
+Phone call voice bot
+
+FAQ + support handling
+
+Multilingual support
+
+3️⃣ Website Creation
+
+Fast, modern, conversion-focused websites.
+
+Landing pages
+
+Business websites
+
+Booking websites
+
+Integrations with analytics + CRM
+
+4️⃣ CRM & Sales Automations
+
+Never lose a lead again.
+
+Auto follow-ups
+
+Lead pipelines
+
+Status tracking
+
+Notifications & reminders
+
+5️⃣ Admin Dashboards & Analytics
+
+See everything happening — in one clean dashboard.
+
+Custom dashboards
+
+Sales analytics
+
+Funnel insights
+
+Automation monitoring
+
+6️⃣ Email & Marketing Workflows
+
+Nurture, convert, retain — automatically.
+
+Drip email campaigns
+
+Abandoned cart workflows
+
+Client reminders
+
+Re-engagement sequences
+
+🧠 HOW IT WORKS
+
+3-step timeline with icons:
+
+Step 1 — Understand
+
+We discuss your business, processes, problems and goals.
+
+Step 2 — Build
+
+We design, integrate and test automations tailored to you.
+
+Step 3 — Launch & Support
+
+We deploy, monitor and optimize continuously.
+
+Small note underneath:
+
+Each project is built to expand over time — start small, scale big.
+
+🧳 PORTFOLIO SECTION
+
+Title:
+
+Real Solutions. Real Results.
+
+Cards with screenshots + descriptions:
+
+💇‍♀️ Salon Booking Assistant
+
+Automated website bookings + WhatsApp reminders.
+Reduced no-shows, saved 6+ hours/week.
+
+🦷 Dental Appointment Bot
+
+Voice + chatbot scheduling system.
+Auto confirmations, follow-ups, recalls.
+
+🏠 Real Estate Lead Assistant
+
+Chatbot that qualifies leads & books visits.
+Sends info directly to CRM.
+
+🛒 Ecommerce Support & Recovery
+
+AI support + abandoned cart emails.
+Recovered lost sales and reduced support load.
+
+CTA under grid:
+See Full Case Studies →
+
+💵 PRICING SECTION
+
+Title:
+
+Simple, Transparent Pricing
+
+Three cards:
+
+Starter — For small businesses
+
+From $99/month
+✔ Chatbot OR automation
+✔ Basic setup
+✔ Email support
+
+Growth — Most Popular
+
+From $299/month
+✔ Multiple automations
+✔ CRM + email workflows
+✔ Priority support
+✔ Dashboard
+
+Pro — Custom
+
+Custom pricing
+✔ Advanced integrations
+✔ Voice bot + complex flows
+✔ Dedicated support
+✔ Strategy + reports
+
+Small footnote:
+
+Pricing depends on scope & tools — we’ll suggest what makes sense.
+
+CTA:
+Request Pricing →
+
+🏢 ABOUT SECTION
+
+Left text, right founder photo or AI illustration.
+
+Title:
+
+Built for businesses that don’t want to waste time.
+
+Copy:
+
+At AurexAuto, we believe software should work for you — not the other way around.
+We design automation systems that remove manual work, improve customer experience, and let teams focus on real growth.
+
+Bullets:
+✔ Practical solutions
+✔ Fast delivery
+✔ Clear communication
+✔ Long-term partnership
+
+✉ CONTACT SECTION
+
+Title:
+
+Let’s build your automation plan.
+
+Form fields:
+
+Name
+
+Business / Industry
+
+What do you want to automate?
+
+Email / Phone
+
+Budget dropdown
+
+CTA:
+Book Free Strategy Call
+
+Contact footer:
+📧 support@aurexauto.com
+
+📍 Remote — Worldwide
+
+🦶 FOOTER
+
+Columns:
+
+AurexAuto
+
+Short mission text.
+
+Services
+
+AI Automation
+Chatbots & Voice
+Web Development
+Dashboards
+CRM & Marketing
+
+Quick Links
+
+Portfolio
+Pricing
+Blog (future)
+Contact
+
+Social
+
+LinkedIn
+GitHub (optional)
+X / Instagram (if you want)
+
+Copyright bar.
+
+✨ Bonus Details to Make It Feel “AI”
+
+Subtle animated gradients behind sections
+
+Floating blobs / particles
+
+Glow effects on buttons/icons
+
+Subtle typing animation text in hero:
+
+“bookings” → “leads” → “support” → “tasks”
+
+Nothing heavy — clean and premium.
