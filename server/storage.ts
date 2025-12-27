@@ -1,4 +1,4 @@
-// Storage interface - not used for static site
+// Minimal storage interface for static site
 export interface IStorage {}
 
 export class MemStorage implements IStorage {}
