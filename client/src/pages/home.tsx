@@ -64,13 +64,13 @@ const testimonials = [
 export default function HomePage() {
   return (
     <div>
-      <section className="relative min-h-[calc(100vh-4rem)] flex flex-col justify-center overflow-hidden">
+      <section className="relative h-[calc(100vh-4rem)] flex flex-col overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[100px]" />
           <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[100px]" />
         </div>
 
-        <div className="container mx-auto px-4 sm:px-6 relative z-10 py-12">
+        <div className="container mx-auto px-4 sm:px-6 relative z-10 flex-1 flex flex-col justify-center -mt-8">
           <div className="text-center mb-4">
             <Badge variant="secondary" className="px-4 py-1.5 text-xs font-medium border border-border/50">
               Trusted by 500+ Businesses
@@ -116,7 +116,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="mt-auto py-8 border-t border-border/50 bg-card/30">
+        <div className="py-6 border-t border-border/50 bg-card/30">
           <div className="container mx-auto px-4 sm:px-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               {stats.map((stat, index) => (
