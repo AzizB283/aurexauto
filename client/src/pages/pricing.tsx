@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle2, ArrowRight, HelpCircle } from "lucide-react";
+import { CheckCircle2, ArrowRight, X } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -13,42 +13,49 @@ import {
 const plans = [
   {
     name: "Starter",
-    subtitle: "For small businesses",
-    price: "$99",
+    subtitle: "Perfect for small businesses",
+    price: "$497",
     period: "/month",
+    description: "Essential automation to get started",
     features: [
-      "1 Chatbot OR automation",
-      "Basic setup & configuration",
-      "Email support",
-      "Monthly check-in",
+      { text: "1 AI Chatbot", included: true },
+      { text: "Basic CRM Integration", included: true },
+      { text: "Email Support", included: true },
+      { text: "500 conversations/mo", included: true },
+      { text: "Voice Assistant", included: false },
+      { text: "Custom Dashboard", included: false },
     ],
     highlight: false,
   },
   {
     name: "Growth",
     subtitle: "Most Popular",
-    price: "$299",
+    price: "$997",
     period: "/month",
+    description: "Scale with advanced automations",
     features: [
-      "Multiple automations",
-      "CRM + email workflows",
-      "Priority support",
-      "Custom dashboard",
-      "Weekly optimization",
+      { text: "Multiple AI Chatbots", included: true },
+      { text: "Full CRM + Email Workflows", included: true },
+      { text: "Priority Support", included: true },
+      { text: "5,000 conversations/mo", included: true },
+      { text: "Voice Assistant", included: true },
+      { text: "Custom Dashboard", included: true },
     ],
     highlight: true,
   },
   {
-    name: "Pro",
-    subtitle: "Custom",
+    name: "Enterprise",
+    subtitle: "For large organizations",
     price: "Custom",
-    period: " pricing",
+    period: "",
+    description: "Tailored solutions for your needs",
     features: [
-      "Advanced integrations",
-      "Voice bot + complex flows",
-      "Dedicated support manager",
-      "Strategy consulting",
-      "Custom reporting",
+      { text: "Unlimited Chatbots", included: true },
+      { text: "Advanced Integrations", included: true },
+      { text: "Dedicated Account Manager", included: true },
+      { text: "Unlimited conversations", included: true },
+      { text: "Custom Voice AI", included: true },
+      { text: "White-label Options", included: true },
     ],
     highlight: false,
   },
@@ -65,7 +72,7 @@ const faqs = [
   },
   {
     question: "Do you offer custom solutions?",
-    answer: "Absolutely! Our Pro plan is fully customizable. We'll work with you to create a solution that fits your exact needs.",
+    answer: "Absolutely! Our Enterprise plan is fully customizable. We'll work with you to create a solution that fits your exact needs.",
   },
   {
     question: "Is there a contract or commitment?",
@@ -73,7 +80,7 @@ const faqs = [
   },
   {
     question: "What kind of support do you provide?",
-    answer: "We offer email support for Starter, priority support for Growth, and dedicated support managers for Pro clients.",
+    answer: "We offer email support for Starter, priority support for Growth, and dedicated account managers for Enterprise clients.",
   },
 ];
 
@@ -120,13 +127,20 @@ export default function PricingPage() {
                     <span className="text-4xl font-bold">{plan.price}</span>
                     <span className="text-muted-foreground">{plan.period}</span>
                   </div>
+                  <p className="text-sm text-muted-foreground mt-2">{plan.description}</p>
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-3">
                     {plan.features.map((feature, fIndex) => (
                       <li key={fIndex} className="flex items-start gap-3 text-sm">
-                        <CheckCircle2 className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
-                        <span className="text-foreground/80">{feature}</span>
+                        {feature.included ? (
+                          <CheckCircle2 className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
+                        ) : (
+                          <X className="w-4 h-4 text-muted-foreground/50 flex-shrink-0 mt-0.5" />
+                        )}
+                        <span className={feature.included ? "text-foreground/80" : "text-muted-foreground/50"}>
+                          {feature.text}
+                        </span>
                       </li>
                     ))}
                   </ul>
@@ -138,7 +152,7 @@ export default function PricingPage() {
                       variant={plan.highlight ? "default" : "outline"}
                       data-testid={`button-pricing-${index}`}
                     >
-                      Get Started
+                      {plan.price === "Custom" ? "Contact Sales" : "Get Started"}
                     </Button>
                   </Link>
                 </CardFooter>
@@ -147,7 +161,7 @@ export default function PricingPage() {
           </div>
 
           <p className="text-center text-muted-foreground text-sm mt-8">
-            Pricing depends on scope & tools — we'll suggest what makes sense for your business.
+            All plans include a 14-day free trial. No credit card required.
           </p>
         </div>
       </section>

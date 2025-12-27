@@ -3,16 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { 
   ArrowRight,
-  CheckCircle2,
   Target,
   Heart,
   Zap,
-  Users,
-  Clock,
   MessageSquare,
-  Shield,
-  Award,
 } from "lucide-react";
+import { SiOpenai, SiMake, SiZapier, SiTwilio, SiStripe, SiSlack, SiNotion, SiAirtable } from "react-icons/si";
 
 const values = [
   {
@@ -37,12 +33,15 @@ const values = [
   },
 ];
 
-const team = [
-  {
-    name: "The Founders",
-    role: "Building the Future of Business Automation",
-    description: "A team of engineers, designers, and business strategists passionate about helping businesses thrive through intelligent automation.",
-  },
+const poweredBy = [
+  { name: "OpenAI", icon: SiOpenai },
+  { name: "Make", icon: SiMake },
+  { name: "Zapier", icon: SiZapier },
+  { name: "Twilio", icon: SiTwilio },
+  { name: "Stripe", icon: SiStripe },
+  { name: "Slack", icon: SiSlack },
+  { name: "Notion", icon: SiNotion },
+  { name: "Airtable", icon: SiAirtable },
 ];
 
 const milestones = [
@@ -142,20 +141,23 @@ export default function AboutPage() {
       <section className="py-16 sm:py-20">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold mb-4">The Team</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">Powered By</h2>
+            <p className="text-muted-foreground max-w-xl mx-auto">
+              We leverage the best tools and platforms to build your automation systems
+            </p>
           </div>
 
-          <div className="max-w-2xl mx-auto">
-            <Card className="bg-card/50 border-border/50 text-center" data-testid="card-team">
-              <CardContent className="pt-8 pb-8">
-                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center mx-auto mb-6">
-                  <Users className="w-12 h-12 text-white" />
-                </div>
-                <h3 className="text-xl font-bold mb-2">{team[0].name}</h3>
-                <p className="text-purple-400 mb-4">{team[0].role}</p>
-                <p className="text-muted-foreground max-w-md mx-auto">{team[0].description}</p>
-              </CardContent>
-            </Card>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 max-w-3xl mx-auto">
+            {poweredBy.map((tool, index) => (
+              <div 
+                key={index} 
+                className="flex flex-col items-center justify-center p-6 rounded-lg bg-card/50 border border-border/50 hover-elevate"
+                data-testid={`powered-by-${index}`}
+              >
+                <tool.icon className="w-8 h-8 text-muted-foreground mb-3" />
+                <span className="text-sm font-medium">{tool.name}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>

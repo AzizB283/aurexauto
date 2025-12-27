@@ -64,29 +64,29 @@ const testimonials = [
 export default function HomePage() {
   return (
     <div>
-      <section className="relative py-24 sm:py-32 overflow-hidden">
+      <section className="relative min-h-[calc(100vh-4rem)] flex flex-col justify-center overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[100px]" />
           <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-cyan-500/10 rounded-full blur-[100px]" />
         </div>
 
-        <div className="container mx-auto px-4 sm:px-6 relative z-10">
-          <div className="text-center mb-6">
+        <div className="container mx-auto px-4 sm:px-6 relative z-10 py-12">
+          <div className="text-center mb-4">
             <Badge variant="secondary" className="px-4 py-1.5 text-xs font-medium border border-border/50">
               Trusted by 500+ Businesses
             </Badge>
           </div>
 
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-center mb-6 leading-tight">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-center mb-4 leading-tight">
             Automate. Optimize.{" "}
             <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">Scale.</span>
           </h1>
 
-          <p className="text-lg sm:text-xl text-muted-foreground text-center max-w-2xl mx-auto mb-8">
+          <p className="text-base sm:text-lg text-muted-foreground text-center max-w-2xl mx-auto mb-6">
             Transform your business operations with AI-powered automation. Save time, reduce costs, and never miss an opportunity.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center mb-5">
             <Link href="/contact" data-testid="link-hero-cta">
               <Button size="lg" className="w-full sm:w-auto" data-testid="button-hero-cta">
                 Get Started Free
@@ -115,19 +115,19 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </section>
 
-      <section className="py-12 border-y border-border/50 bg-card/30">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center" data-testid={`stat-${index}`}>
-                <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-                  {stat.value}
+        <div className="mt-auto py-8 border-t border-border/50 bg-card/30">
+          <div className="container mx-auto px-4 sm:px-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {stats.map((stat, index) => (
+                <div key={index} className="text-center" data-testid={`stat-${index}`}>
+                  <div className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                    {stat.value}
+                  </div>
+                  <div className="text-xs text-muted-foreground mt-1">{stat.label}</div>
                 </div>
-                <div className="text-sm text-muted-foreground mt-1">{stat.label}</div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
