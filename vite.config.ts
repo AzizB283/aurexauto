@@ -30,7 +30,8 @@ export default defineConfig({
   publicDir: path.resolve(import.meta.dirname, "public"),
   root: path.resolve(import.meta.dirname),
   build: {
-    outDir: path.resolve(import.meta.dirname, "dist/public"),
+    // output to `dist` so Vercel can pick it up by default or via vercel.json
+    outDir: path.resolve(import.meta.dirname, "dist"),
     emptyOutDir: true,
   },
   server: {
