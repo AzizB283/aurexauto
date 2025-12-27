@@ -1,208 +1,179 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { CheckCircle2, ArrowRight, X } from "lucide-react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+import { Check, ArrowRight, Wrench, Sparkles } from "lucide-react";
 
 const plans = [
   {
-    name: "Starter",
-    subtitle: "Perfect for small businesses",
-    price: "$497",
-    period: "/month",
-    description: "Essential automation to get started",
+    name: "Essential",
+    description: "Perfect starting point for businesses entering the digital space",
+    price: "$2,000",
+    period: "one-time",
     features: [
-      { text: "1 AI Chatbot", included: true },
-      { text: "Basic CRM Integration", included: true },
-      { text: "Email Support", included: true },
-      { text: "500 conversations/mo", included: true },
-      { text: "Voice Assistant", included: false },
-      { text: "Custom Dashboard", included: false },
+      "Modern, responsive website design",
+      "Contact forms with email integration",
+      "AI chat agent for customer inquiries",
+      "Single booking calendar system",
+      "Mobile-optimized interface",
+      "Basic SEO setup",
+      "SSL certificate & security",
     ],
     highlight: false,
   },
   {
-    name: "Growth",
-    subtitle: "Most Popular",
-    price: "$997",
-    period: "/month",
-    description: "Scale with advanced automations",
+    name: "Professional",
+    description: "Advanced automation for growing businesses",
+    price: "$3,500",
+    period: "one-time",
     features: [
-      { text: "Multiple AI Chatbots", included: true },
-      { text: "Full CRM + Email Workflows", included: true },
-      { text: "Priority Support", included: true },
-      { text: "5,000 conversations/mo", included: true },
-      { text: "Voice Assistant", included: true },
-      { text: "Custom Dashboard", included: true },
+      "Everything in Essential, plus:",
+      "Advanced AI integration (chat + voice)",
+      "Custom admin panel",
+      "Multiple booking calendars",
+      "Customer data management",
+      "Analytics dashboard",
+      "Email & SMS automation",
+      "15 days support",
+      "Advanced SEO optimization",
     ],
     highlight: true,
   },
   {
     name: "Enterprise",
-    subtitle: "For large organizations",
-    price: "Custom",
-    period: "",
-    description: "Tailored solutions for your needs",
+    description: "Complete business automation suite with ongoing growth support",
+    price: "$4,500",
+    period: "one-time",
     features: [
-      { text: "Unlimited Chatbots", included: true },
-      { text: "Advanced Integrations", included: true },
-      { text: "Dedicated Account Manager", included: true },
-      { text: "Unlimited conversations", included: true },
-      { text: "Custom Voice AI", included: true },
-      { text: "White-label Options", included: true },
+      "Everything in Professional, plus:",
+      "CRM system integration",
+      "Marketing automation suite",
+      "Advanced SEO & content strategy",
+      "Social media integration",
+      "Performance analytics & reporting",
+      "30 days support",
     ],
     highlight: false,
   },
 ];
 
-const faqs = [
-  {
-    question: "How long does setup take?",
-    answer: "Most projects are up and running within 48-72 hours. Complex integrations may take 1-2 weeks depending on your requirements.",
-  },
-  {
-    question: "Can I upgrade or downgrade my plan?",
-    answer: "Yes, you can change your plan at any time. Changes take effect on your next billing cycle.",
-  },
-  {
-    question: "Do you offer custom solutions?",
-    answer: "Absolutely! Our Enterprise plan is fully customizable. We'll work with you to create a solution that fits your exact needs.",
-  },
-  {
-    question: "Is there a contract or commitment?",
-    answer: "No long-term contracts. All plans are month-to-month and you can cancel anytime.",
-  },
-  {
-    question: "What kind of support do you provide?",
-    answer: "We offer email support for Starter, priority support for Growth, and dedicated account managers for Enterprise clients.",
-  },
+const maintenanceFeatures = [
+  "Unlimited technical support",
+  "Third-party integration maintenance",
+  "Regular software updates",
+  "Security patches & monitoring",
+  "Feature enhancements",
+  "Performance optimization",
+  "Priority bug fixes",
+  "Monthly strategy consultations",
 ];
 
 export default function PricingPage() {
   return (
     <div>
-      <section className="relative py-20 sm:py-24 overflow-hidden">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[100px]" />
-        </div>
+      <section className="py-16 sm:py-20">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {plans.map((plan, index) => (
+              <div
+                key={index}
+                className={`relative rounded-xl p-6 sm:p-8 ${
+                  plan.highlight
+                    ? "bg-zinc-900/80 dark:bg-zinc-900/80 border border-zinc-700/50"
+                    : "bg-zinc-900/50 dark:bg-zinc-900/50 border border-zinc-800/50"
+                }`}
+                data-testid={`card-pricing-${index}`}
+              >
+                {plan.highlight && (
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 bg-orange-500 text-white text-sm font-medium px-4 py-1.5 rounded-full">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    Most Popular
+                  </div>
+                )}
 
-        <div className="container mx-auto px-4 sm:px-6 relative z-10">
-          <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl sm:text-5xl font-bold mb-6">
-              Simple,{" "}
-              <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">Transparent</span>{" "}
-              Pricing
-            </h1>
-            <p className="text-lg text-muted-foreground">
-              Choose the plan that fits your business. No hidden fees, no surprises.
-            </p>
+                <div className="mb-6">
+                  <h3 className="text-xl font-bold text-foreground mb-2">{plan.name}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {plan.description}
+                  </p>
+                </div>
+
+                <div className="mb-6">
+                  <span className="text-4xl sm:text-5xl font-bold text-foreground">{plan.price}</span>
+                  <span className="text-muted-foreground ml-2">{plan.period}</span>
+                </div>
+
+                <Link href="/contact" className="block mb-8" data-testid={`link-pricing-${index}`}>
+                  <Button
+                    className={`w-full ${
+                      plan.highlight
+                        ? "bg-orange-500 hover:bg-orange-600 text-white border-0"
+                        : "bg-transparent border border-zinc-600 hover:bg-zinc-800 text-foreground"
+                    }`}
+                    data-testid={`button-pricing-${index}`}
+                  >
+                    Get Started
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </Link>
+
+                <ul className="space-y-3">
+                  {plan.features.map((feature, fIndex) => (
+                    <li key={fIndex} className="flex items-start gap-3 text-sm">
+                      <Check className="w-4 h-4 text-orange-500 flex-shrink-0 mt-0.5" />
+                      <span className="text-foreground/80">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       <section className="py-16 sm:py-20">
         <div className="container mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {plans.map((plan, index) => (
-              <Card 
-                key={index} 
-                className={`relative bg-card/50 border-border/50 ${plan.highlight ? 'border-purple-500/50 shadow-lg shadow-purple-500/10' : ''}`}
-                data-testid={`card-pricing-${index}`}
-              >
-                {plan.highlight && (
-                  <Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-gradient-to-r from-purple-500 to-cyan-500 text-white border-0">
-                    Most Popular
-                  </Badge>
-                )}
-                <CardHeader className="text-center pb-2">
-                  <CardTitle className="text-xl">{plan.name}</CardTitle>
-                  <CardDescription>{plan.subtitle}</CardDescription>
-                  <div className="mt-4">
-                    <span className="text-4xl font-bold">{plan.price}</span>
-                    <span className="text-muted-foreground">{plan.period}</span>
-                  </div>
-                  <p className="text-sm text-muted-foreground mt-2">{plan.description}</p>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-3">
-                    {plan.features.map((feature, fIndex) => (
-                      <li key={fIndex} className="flex items-start gap-3 text-sm">
-                        {feature.included ? (
-                          <CheckCircle2 className="w-4 h-4 text-cyan-400 flex-shrink-0 mt-0.5" />
-                        ) : (
-                          <X className="w-4 h-4 text-muted-foreground/50 flex-shrink-0 mt-0.5" />
-                        )}
-                        <span className={feature.included ? "text-foreground/80" : "text-muted-foreground/50"}>
-                          {feature.text}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-                <CardFooter>
-                  <Link href="/contact" className="w-full" data-testid={`link-pricing-${index}`}>
-                    <Button 
-                      className="w-full" 
-                      variant={plan.highlight ? "default" : "outline"}
-                      data-testid={`button-pricing-${index}`}
-                    >
-                      {plan.price === "Custom" ? "Contact Sales" : "Get Started"}
-                    </Button>
-                  </Link>
-                </CardFooter>
-              </Card>
-            ))}
-          </div>
-
-          <p className="text-center text-muted-foreground text-sm mt-8">
-            All plans include a 14-day free trial. No credit card required.
-          </p>
-        </div>
-      </section>
-
-      <section className="py-16 sm:py-20 bg-card/30 border-y border-border/50">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="max-w-2xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
+          <div className="max-w-4xl mx-auto bg-zinc-900/50 dark:bg-zinc-900/50 border border-zinc-800/50 rounded-xl p-8 sm:p-12">
+            <div className="text-center mb-10">
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-orange-500/10 mb-6">
+                <Wrench className="w-7 h-7 text-orange-500" />
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-bold mb-3">
+                Monthly Maintenance Plans Available
+              </h2>
+              <p className="text-muted-foreground">
+                Keep your automation running smoothly with optional ongoing support
+              </p>
             </div>
 
-            <Accordion type="single" collapsible className="space-y-4">
-              {faqs.map((faq, index) => (
-                <AccordionItem 
-                  key={index} 
-                  value={`item-${index}`} 
-                  className="bg-card/50 rounded-lg border border-border/50 px-4"
-                  data-testid={`faq-${index}`}
-                >
-                  <AccordionTrigger className="text-left hover:no-underline py-4">
-                    <span className="font-medium">{faq.question}</span>
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground pb-4">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-4 mb-10">
+              {maintenanceFeatures.map((feature, index) => (
+                <div key={index} className="flex items-center gap-3">
+                  <Check className="w-4 h-4 text-orange-500 flex-shrink-0" />
+                  <span className="text-foreground/80 text-sm">{feature}</span>
+                </div>
               ))}
-            </Accordion>
+            </div>
+
+            <div className="bg-zinc-800/50 dark:bg-zinc-800/50 rounded-lg py-4 px-6 text-center">
+              <p className="text-muted-foreground text-sm">
+                Custom maintenance pricing based on your package and needs.{" "}
+                <Link href="/contact" className="text-orange-500 hover:underline" data-testid="link-maintenance-contact">
+                  Contact us for details.
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       <section className="py-16 sm:py-20">
         <div className="container mx-auto px-4 sm:px-6 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Still Have Questions?</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4">Ready to Get Started?</h2>
           <p className="text-muted-foreground max-w-xl mx-auto mb-8">
-            Schedule a free consultation call and we'll help you find the right solution.
+            Schedule a free consultation call and we'll help you find the right solution for your business.
           </p>
           <Link href="/contact" data-testid="link-pricing-consultation">
-            <Button size="lg" data-testid="button-pricing-consultation">
-              Request Custom Quote
+            <Button size="lg" className="bg-orange-500 hover:bg-orange-600 text-white" data-testid="button-pricing-consultation">
+              Request Free Consultation
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </Link>
