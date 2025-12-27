@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -8,7 +7,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
-import { z } from "zod";
+import { useMutation } from "@tanstack/react-query";
+import { apiRequest } from "@/lib/queryClient";
+import { insertContactSchema, type InsertContact } from "@shared/schema";
 import { 
   Send, 
   Mail, 
@@ -18,17 +19,6 @@ import {
   MessageSquare,
   Phone,
 } from "lucide-react";
-
-const contactSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  email: z.string().email("Invalid email address"),
-  business: z.string().min(1, "Business is required"),
-  phone: z.string().optional(),
-  automationNeeds: z.string().min(1, "Please tell us what you want to automate"),
-  budget: z.string().min(1, "Please select a budget range"),
-});
-
-type ContactFormData = z.infer<typeof contactSchema>;
 
 const contactMethods = [
   {
@@ -51,10 +41,9 @@ const contactMethods = [
 
 export default function ContactPage() {
   const { toast } = useToast();
-  const [isSubmitting, setIsSubmitting] = useState(false);
   
-  const form = useForm<ContactFormData>({
-    resolver: zodResolver(contactSchema),
+  const form = useForm<InsertContact>({
+    resolver: zodResolver(insertContactSchema),
     defaultValues: {
       name: "",
       business: "",
@@ -65,28 +54,29 @@ export default function ContactPage() {
     },
   });
 
-  const onSubmit = async (data: ContactFormData) => {
-    setIsSubmitting(true);
-    
-    // TODO: Connect to your form service (Formspree, Airtable, Make, etc.)
-    // Example with Formspree:
-    // const response = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(data),
-    // });
-    
-    console.log("Form data:", data);
-    
-    // Simulate submission for now
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    toast({
-      title: "Message sent!",
-      description: "We'll get back to you within 24 hours.",
-    });
-    form.reset();
-    setIsSubmitting(false);
+  const mutation = useMutation({
+    mutationFn: async (data: InsertContact) => {
+      const response = await apiRequest("POST", "/api/contact", data);
+      return response.json();
+    },
+    onSuccess: () => {
+      toast({
+        title: "Message sent!",
+        description: "We'll get back to you within 24 hours.",
+      });
+      form.reset();
+    },
+    onError: () => {
+      toast({
+        title: "Something went wrong",
+        description: "Please try again or email us directly.",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const onSubmit = (data: InsertContact) => {
+    mutation.mutate(data);
   };
 
   return (
@@ -227,14 +217,14 @@ export default function ContactPage() {
                         type="submit" 
                         size="lg" 
                         className="w-full" 
-                        disabled={isSubmitting}
+                        disabled={mutation.isPending}
                         data-testid="button-submit-contact"
                       >
-                        {isSubmitting ? (
+                        {mutation.isPending ? (
                           "Sending..."
                         ) : (
                           <>
-                            Send Message
+                            Book Free Strategy Call
                             <Send className="w-4 h-4 ml-2" />
                           </>
                         )}
@@ -246,69 +236,48 @@ export default function ContactPage() {
             </div>
 
             <div className="space-y-6">
-              <Card className="bg-card/50 border-border/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold mb-4 flex items-center gap-2">
-                    <MessageSquare className="w-5 h-5 text-purple-400" />
-                    Get in Touch
-                  </h3>
-                  <div className="space-y-4">
-                    {contactMethods.map((method, index) => (
-                      <div key={index} className="flex items-start gap-3" data-testid={`contact-method-${index}`}>
-                        <div className="w-10 h-10 rounded-lg bg-muted/50 flex items-center justify-center flex-shrink-0">
-                          <method.icon className="w-5 h-5 text-muted-foreground" />
-                        </div>
-                        <div>
-                          <div className="text-sm text-muted-foreground">{method.title}</div>
-                          {method.href ? (
-                            <a 
-                              href={method.href} 
-                              className="font-medium hover:text-purple-400 transition-colors"
-                              data-testid={`link-contact-${index}`}
-                            >
-                              {method.value}
-                            </a>
-                          ) : (
-                            <div className="font-medium">{method.value}</div>
-                          )}
-                        </div>
+              {contactMethods.map((method, index) => (
+                <Card key={index} className="bg-card/50 border-border/50" data-testid={`card-contact-method-${index}`}>
+                  <CardContent className="p-6">
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500/20 to-cyan-500/20 flex items-center justify-center flex-shrink-0">
+                        <method.icon className="w-5 h-5 text-purple-400" />
                       </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
+                      <div>
+                        <div className="text-sm text-muted-foreground mb-1">{method.title}</div>
+                        {method.href ? (
+                          <a href={method.href} className="font-medium hover:text-purple-400 transition-colors">
+                            {method.value}
+                          </a>
+                        ) : (
+                          <div className="font-medium">{method.value}</div>
+                        )}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
 
               <Card className="bg-gradient-to-br from-purple-500/10 to-cyan-500/10 border-border/50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold mb-4 flex items-center gap-2">
-                    <Phone className="w-5 h-5 text-cyan-400" />
-                    Prefer a Call?
+                  <h3 className="font-semibold mb-3 flex items-center gap-2">
+                    <CheckCircle2 className="w-5 h-5 text-cyan-400" />
+                    What Happens Next?
                   </h3>
-                  <p className="text-sm text-muted-foreground mb-4">
-                    Schedule a free 15-minute discovery call to discuss your automation needs.
-                  </p>
-                  <Button variant="outline" className="w-full" data-testid="button-schedule-call">
-                    Schedule a Call
-                  </Button>
-                </CardContent>
-              </Card>
-
-              <Card className="bg-card/50 border-border/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold mb-4">What Happens Next?</h3>
-                  <div className="space-y-3">
-                    {[
-                      "We review your requirements",
-                      "Schedule a free consultation call",
-                      "Present a custom automation plan",
-                      "Start building your solution",
-                    ].map((step, index) => (
-                      <div key={index} className="flex items-center gap-3 text-sm">
-                        <CheckCircle2 className="w-4 h-4 text-cyan-400 flex-shrink-0" />
-                        <span className="text-muted-foreground">{step}</span>
-                      </div>
-                    ))}
-                  </div>
+                  <ul className="space-y-3 text-sm text-muted-foreground">
+                    <li className="flex items-start gap-2">
+                      <span className="w-5 h-5 rounded-full bg-purple-500/20 text-purple-400 text-xs flex items-center justify-center flex-shrink-0 mt-0.5">1</span>
+                      We review your submission
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-5 h-5 rounded-full bg-purple-500/20 text-purple-400 text-xs flex items-center justify-center flex-shrink-0 mt-0.5">2</span>
+                      Schedule a free strategy call
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <span className="w-5 h-5 rounded-full bg-purple-500/20 text-purple-400 text-xs flex items-center justify-center flex-shrink-0 mt-0.5">3</span>
+                      Receive a custom proposal
+                    </li>
+                  </ul>
                 </CardContent>
               </Card>
             </div>
