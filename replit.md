@@ -31,26 +31,8 @@ AurexAuto is a multi-page business website for an AI automation agency. The site
 - `/contact` - Contact form with sidebar info
 
 ### Backend Architecture
-- **Runtime**: Node.js with Express
-- **Language**: TypeScript (ESM modules)
-- **API Pattern**: REST endpoints under `/api/` prefix
-- **Build**: esbuild for production bundling
 
-The server handles API routes and serves the static frontend in production.
-
-### Data Layer
-- **Storage**: In-memory storage for contact form submissions
-- **ORM**: Drizzle ORM (configured for PostgreSQL if needed)
-- **Schema Location**: `shared/schema.ts`
-- **Validation**: Zod schemas generated from Drizzle schemas via drizzle-zod
-
-Current entities:
-- `users` - Basic user accounts (unused)
-- `contactSubmissions` - Lead capture form submissions (name, business, email, phone, budget, automation needs)
-
-### API Endpoints
-- `POST /api/contact` - Submit contact form (validated with Zod)
-- `GET /api/contacts` - Get all contact submissions
+- None — this is a frontend-only static site. No server or API runtime is included in this repository.
 
 ### Design System
 The application uses a custom theme with:
@@ -86,9 +68,7 @@ client/
 │   │   └── contact.tsx
 │   ├── App.tsx
 │   └── index.css
-server/
-├── routes.ts                   # API endpoints
-└── storage.ts                  # In-memory storage
+<!-- server/ removed: frontend-only project -->
 shared/
 └── schema.ts                   # Data types and validation
 ```
