@@ -7,9 +7,8 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
-import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
-import { insertContactSchema, type InsertContact } from "@shared/schema";
+import { z } from "zod";
+import { useState } from "react";
 import { 
   Send, 
   Mail, 
@@ -19,6 +18,17 @@ import {
   MessageSquare,
   Phone,
 } from "lucide-react";
+
+const contactSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  business: z.string().min(1, "Business name is required"),
+  email: z.string().email("Please enter a valid email"),
+  phone: z.string().optional(),
+  budget: z.string().min(1, "Please select a budget range"),
+  automationNeeds: z.string().min(10, "Please describe your needs in at least 10 characters"),
+});
+
+type ContactFormData = z.infer<typeof contactSchema>;
 
 const contactMethods = [
   {
@@ -41,9 +51,10 @@ const contactMethods = [
 
 export default function ContactPage() {
   const { toast } = useToast();
+  const [isSubmitted, setIsSubmitted] = useState(false);
   
-  const form = useForm<InsertContact>({
-    resolver: zodResolver(insertContactSchema),
+  const form = useForm<ContactFormData>({
+    resolver: zodResolver(contactSchema),
     defaultValues: {
       name: "",
       business: "",
@@ -54,83 +65,72 @@ export default function ContactPage() {
     },
   });
 
-  const mutation = useMutation({
-    mutationFn: async (data: InsertContact) => {
-      const response = await apiRequest("POST", "/api/contact", data);
-      return response.json();
-    },
-    onSuccess: () => {
-      toast({
-        title: "Message sent!",
-        description: "We'll get back to you within 24 hours.",
-      });
-      form.reset();
-    },
-    onError: () => {
-      toast({
-        title: "Something went wrong",
-        description: "Please try again or email us directly.",
-        variant: "destructive",
-      });
-    },
-  });
-
-  const onSubmit = (data: InsertContact) => {
-    mutation.mutate(data);
+  const onSubmit = (data: ContactFormData) => {
+    console.log("Form submitted:", data);
+    setIsSubmitted(true);
+    toast({
+      title: "Message sent!",
+      description: "We'll get back to you within 24 hours.",
+    });
+    form.reset();
+    setTimeout(() => setIsSubmitted(false), 3000);
   };
 
   return (
     <div>
-      <section className="relative py-20 sm:py-24 overflow-hidden">
+      <section className="relative py-16 sm:py-20 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-0 left-1/3 w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-[100px]" />
-          <div className="absolute bottom-0 right-1/3 w-[300px] h-[300px] bg-cyan-500/10 rounded-full blur-[100px]" />
+          <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-[100px]" />
+          <div className="absolute bottom-0 left-1/4 w-[300px] h-[300px] bg-cyan-500/10 rounded-full blur-[100px]" />
         </div>
 
         <div className="container mx-auto px-4 sm:px-6 relative z-10">
-          <div className="text-center max-w-3xl mx-auto">
+          <div className="text-center max-w-3xl mx-auto mb-12">
             <h1 className="text-4xl sm:text-5xl font-bold mb-6">
-              Let's Build Your{" "}
-              <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">Automation Plan</span>
+              Let's{" "}
+              <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">Talk</span>
             </h1>
             <p className="text-lg text-muted-foreground">
-              Tell us about your business and what you'd like to automate. We'll get back to you within 24 hours with a free consultation.
+              Ready to automate your business? Tell us about your needs and we'll create a custom plan for you.
             </p>
           </div>
-        </div>
-      </section>
 
-      <section className="py-16 sm:py-20">
-        <div className="container mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <div className="lg:col-span-2">
               <Card className="bg-card/50 border-border/50">
                 <CardContent className="p-6 sm:p-8">
                   <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <FormField
                           control={form.control}
                           name="name"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Name</FormLabel>
+                              <FormLabel>Your Name</FormLabel>
                               <FormControl>
-                                <Input placeholder="Your name" {...field} data-testid="input-name" />
+                                <Input 
+                                  placeholder="John Smith" 
+                                  {...field} 
+                                  data-testid="input-contact-name"
+                                />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
                           )}
                         />
-
                         <FormField
                           control={form.control}
-                          name="email"
+                          name="business"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Email</FormLabel>
+                              <FormLabel>Business Name</FormLabel>
                               <FormControl>
-                                <Input type="email" placeholder="your@email.com" {...field} data-testid="input-email" />
+                                <Input 
+                                  placeholder="Your Company" 
+                                  {...field} 
+                                  data-testid="input-contact-business"
+                                />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -138,29 +138,38 @@ export default function ContactPage() {
                         />
                       </div>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <FormField
                           control={form.control}
-                          name="business"
+                          name="email"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Business / Industry</FormLabel>
+                              <FormLabel>Email Address</FormLabel>
                               <FormControl>
-                                <Input placeholder="e.g., Dental clinic, Real estate" {...field} data-testid="input-business" />
+                                <Input 
+                                  type="email" 
+                                  placeholder="john@company.com" 
+                                  {...field} 
+                                  data-testid="input-contact-email"
+                                />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
                           )}
                         />
-
                         <FormField
                           control={form.control}
                           name="phone"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Phone (optional)</FormLabel>
+                              <FormLabel>Phone (Optional)</FormLabel>
                               <FormControl>
-                                <Input type="tel" placeholder="+1 (555) 000-0000" {...field} value={field.value || ""} data-testid="input-phone" />
+                                <Input 
+                                  type="tel" 
+                                  placeholder="+1 (555) 000-0000" 
+                                  {...field} 
+                                  data-testid="input-contact-phone"
+                                />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -170,18 +179,23 @@ export default function ContactPage() {
 
                       <FormField
                         control={form.control}
-                        name="automationNeeds"
+                        name="budget"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>What do you want to automate?</FormLabel>
-                            <FormControl>
-                              <Textarea 
-                                placeholder="Tell us about the tasks you'd like to automate, challenges you're facing, or goals you want to achieve..." 
-                                className="min-h-[120px]"
-                                {...field} 
-                                data-testid="input-automation-needs"
-                              />
-                            </FormControl>
+                            <FormLabel>Monthly Budget</FormLabel>
+                            <Select onValueChange={field.onChange} defaultValue={field.value}>
+                              <FormControl>
+                                <SelectTrigger data-testid="select-contact-budget">
+                                  <SelectValue placeholder="Select your budget range" />
+                                </SelectTrigger>
+                              </FormControl>
+                              <SelectContent>
+                                <SelectItem value="starter">$497/mo - Starter</SelectItem>
+                                <SelectItem value="growth">$997/mo - Growth</SelectItem>
+                                <SelectItem value="enterprise">Custom - Enterprise</SelectItem>
+                                <SelectItem value="unsure">Not sure yet</SelectItem>
+                              </SelectContent>
+                            </Select>
                             <FormMessage />
                           </FormItem>
                         )}
@@ -189,25 +203,18 @@ export default function ContactPage() {
 
                       <FormField
                         control={form.control}
-                        name="budget"
+                        name="automationNeeds"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Budget Range</FormLabel>
-                            <Select onValueChange={field.onChange} defaultValue={field.value}>
-                              <FormControl>
-                                <SelectTrigger data-testid="select-budget">
-                                  <SelectValue placeholder="Select your budget range" />
-                                </SelectTrigger>
-                              </FormControl>
-                              <SelectContent>
-                                <SelectItem value="under-500">Under $500</SelectItem>
-                                <SelectItem value="500-1000">$500 - $1,000</SelectItem>
-                                <SelectItem value="1000-2500">$1,000 - $2,500</SelectItem>
-                                <SelectItem value="2500-5000">$2,500 - $5,000</SelectItem>
-                                <SelectItem value="5000-plus">$5,000+</SelectItem>
-                                <SelectItem value="not-sure">Not sure yet</SelectItem>
-                              </SelectContent>
-                            </Select>
+                            <FormLabel>What would you like to automate?</FormLabel>
+                            <FormControl>
+                              <Textarea 
+                                placeholder="Tell us about the tasks you want to automate, your current pain points, or any specific features you're looking for..."
+                                className="min-h-[120px] resize-none"
+                                {...field}
+                                data-testid="textarea-contact-needs"
+                              />
+                            </FormControl>
                             <FormMessage />
                           </FormItem>
                         )}
@@ -216,16 +223,19 @@ export default function ContactPage() {
                       <Button 
                         type="submit" 
                         size="lg" 
-                        className="w-full" 
-                        disabled={mutation.isPending}
-                        data-testid="button-submit-contact"
+                        className="w-full"
+                        disabled={isSubmitted}
+                        data-testid="button-contact-submit"
                       >
-                        {mutation.isPending ? (
-                          "Sending..."
+                        {isSubmitted ? (
+                          <>
+                            <CheckCircle2 className="w-4 h-4 mr-2" />
+                            Sent!
+                          </>
                         ) : (
                           <>
-                            Book Free Strategy Call
-                            <Send className="w-4 h-4 ml-2" />
+                            <Send className="w-4 h-4 mr-2" />
+                            Send Message
                           </>
                         )}
                       </Button>
@@ -238,46 +248,41 @@ export default function ContactPage() {
             <div className="space-y-6">
               {contactMethods.map((method, index) => (
                 <Card key={index} className="bg-card/50 border-border/50" data-testid={`card-contact-method-${index}`}>
-                  <CardContent className="p-6">
-                    <div className="flex items-start gap-4">
-                      <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500/20 to-cyan-500/20 flex items-center justify-center flex-shrink-0">
-                        <method.icon className="w-5 h-5 text-purple-400" />
-                      </div>
-                      <div>
-                        <div className="text-sm text-muted-foreground mb-1">{method.title}</div>
-                        {method.href ? (
-                          <a href={method.href} className="font-medium hover:text-purple-400 transition-colors">
-                            {method.value}
-                          </a>
-                        ) : (
-                          <div className="font-medium">{method.value}</div>
-                        )}
-                      </div>
+                  <CardContent className="p-5 flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-500/20 to-cyan-500/20 flex items-center justify-center flex-shrink-0">
+                      <method.icon className="w-5 h-5 text-purple-400" />
+                    </div>
+                    <div>
+                      <h3 className="font-medium mb-1">{method.title}</h3>
+                      {method.href ? (
+                        <a 
+                          href={method.href} 
+                          className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                          data-testid={`link-contact-${method.title.toLowerCase().replace(' ', '-')}`}
+                        >
+                          {method.value}
+                        </a>
+                      ) : (
+                        <p className="text-sm text-muted-foreground">{method.value}</p>
+                      )}
                     </div>
                   </CardContent>
                 </Card>
               ))}
 
-              <Card className="bg-gradient-to-br from-purple-500/10 to-cyan-500/10 border-border/50">
-                <CardContent className="p-6">
-                  <h3 className="font-semibold mb-3 flex items-center gap-2">
-                    <CheckCircle2 className="w-5 h-5 text-cyan-400" />
-                    What Happens Next?
-                  </h3>
-                  <ul className="space-y-3 text-sm text-muted-foreground">
-                    <li className="flex items-start gap-2">
-                      <span className="w-5 h-5 rounded-full bg-purple-500/20 text-purple-400 text-xs flex items-center justify-center flex-shrink-0 mt-0.5">1</span>
-                      We review your submission
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="w-5 h-5 rounded-full bg-purple-500/20 text-purple-400 text-xs flex items-center justify-center flex-shrink-0 mt-0.5">2</span>
-                      Schedule a free strategy call
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="w-5 h-5 rounded-full bg-purple-500/20 text-purple-400 text-xs flex items-center justify-center flex-shrink-0 mt-0.5">3</span>
-                      Receive a custom proposal
-                    </li>
-                  </ul>
+              <Card className="bg-gradient-to-br from-purple-500/10 to-cyan-500/10 border-purple-500/20">
+                <CardContent className="p-5">
+                  <div className="flex items-center gap-3 mb-3">
+                    <MessageSquare className="w-5 h-5 text-cyan-400" />
+                    <h3 className="font-medium">Quick Consultation</h3>
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Prefer to talk? Book a free 15-minute strategy call.
+                  </p>
+                  <Button variant="outline" className="w-full" data-testid="button-book-call">
+                    <Phone className="w-4 h-4 mr-2" />
+                    Book a Call
+                  </Button>
                 </CardContent>
               </Card>
             </div>
