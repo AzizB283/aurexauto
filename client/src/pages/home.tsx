@@ -76,35 +76,32 @@ export default function HomePage() {
         </div>
 
         <div className="container mx-auto px-4 sm:px-6 relative z-10 flex-1 flex flex-col justify-center -mt-8">
-          <div className="text-center mb-6">
-            <Badge
-              variant="secondary"
-              className="px-5 py-2 text-sm font-medium border border-border/50"
-            >
-              Trusted by 500+ Businesses
-            </Badge>
+          <div className="text-center mb-4">
+            <span className="text-sm font-medium bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent tracking-wide uppercase">
+              Automate. Assist. Accelerate.
+            </span>
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-center mb-4 leading-tight">
-            Automate. Optimize.{" "}
+            Build AI systems that work for your business —{" "}
             <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
-              Scale.
+              24/7.
             </span>
           </h1>
 
           <p className="text-base sm:text-lg text-muted-foreground text-center max-w-2xl mx-auto mb-6">
-            Transform your business operations with AI-powered automation. Save
-            time, reduce costs, and never miss an opportunity.
+            We design AI chatbots, voice assistants, automations, and dashboards
+            that save time, cut costs, and convert more customers.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-3 justify-center mb-5">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center mb-3">
             <Link href="/contact" data-testid="link-hero-cta">
               <Button
                 size="lg"
                 className="w-full sm:w-auto"
                 data-testid="button-hero-cta"
               >
-                Get Started Free
+                Get a Free Consultation
                 <ArrowRight className="w-4 h-4 ml-2" />
               </Button>
             </Link>
@@ -115,25 +112,14 @@ export default function HomePage() {
                 className="w-full sm:w-auto"
                 data-testid="button-hero-portfolio"
               >
-                View Case Studies
+                See Live Demo
               </Button>
             </Link>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-green-500" />
-              No Credit Card
-            </div>
-            <div className="flex items-center gap-2">
-              <Clock className="w-4 h-4 text-purple-400" />
-              48hr Setup
-            </div>
-            <div className="flex items-center gap-2">
-              <Shield className="w-4 h-4 text-cyan-400" />
-              Cancel Anytime
-            </div>
-          </div>
+          <p className="text-center text-sm text-muted-foreground">
+            No spam. Just ideas + strategy.
+          </p>
         </div>
 
         <div className="py-8 border-t border-border/50 bg-card/30">
