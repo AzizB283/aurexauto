@@ -16,6 +16,7 @@ import {
   Play,
 } from "lucide-react";
 import heroImage from "@assets/generated_images/ai_dashboard_interface_mockup.png";
+import Seo from "@/components/seo";
 
 const stats = [
   { value: "500+", label: "Businesses" },
@@ -69,6 +70,11 @@ const testimonials = [
 export default function HomePage() {
   return (
     <div>
+      <Seo
+        title={"AurexAuto — AI automation systems for businesses | Chatbots & Voice Assistants"}
+        description={"We design AI chatbots, voice assistants, automations, and dashboards that save time, cut costs, and convert more customers."}
+        pathname="/"
+      />
       <section className="relative h-[calc(100vh-4rem)] flex flex-col overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[100px]" />

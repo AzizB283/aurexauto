@@ -176,9 +176,9 @@ function Footer() {
               </Button>
             </div>
             <div className="space-y-2 text-sm text-muted-foreground">
-              <a href="mailto:support@aurexauto.com" className="flex items-center gap-2 hover:text-foreground transition-colors" data-testid="link-email">
+              <a href="mailto:contact@aurexauto.com" className="flex items-center gap-2 hover:text-foreground transition-colors" data-testid="link-email">
                 <Mail className="w-4 h-4" />
-                support@aurexauto.com
+                contact@aurexauto.com
               </a>
               <div className="flex items-center gap-2" data-testid="text-location">
                 <MapPin className="w-4 h-4" />

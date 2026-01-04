@@ -1,7 +1,9 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import Seo from "@/components/seo";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { 
   ArrowRight, 
   TrendingUp,
@@ -72,8 +74,18 @@ const metrics = [
 ];
 
 export default function PortfolioPage() {
+  const portfolioVideoSourceId = import.meta.env.VITE_PORTFOLIO_VIDEO_ID || "";
+
+  const embedUrl = portfolioVideoSourceId
+    ? `https://drive.google.com/file/d/${portfolioVideoSourceId}/preview`
+    : "";
   return (
     <div>
+      <Seo
+        title={"Portfolio — AI Automation Case Studies | AurexAuto"}
+        description={"Real results from AI automation projects: reduced no-shows, increased revenue, and saved hours."}
+        pathname="/portfolio"
+      />
       <section className="relative py-20 sm:py-24 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 right-1/4 w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-[100px]" />
@@ -154,6 +166,29 @@ export default function PortfolioPage() {
           </div>
         </div>
       </section>
+
+      {portfolioVideoSourceId ? (
+        <section className="py-12">
+          <div className="container mx-auto px-4 sm:px-6">
+            <h3 className="text-2xl font-bold mb-4 text-center">Featured Video</h3>
+            <div className="max-w-4xl mx-auto">
+              <AspectRatio className="w-full rounded-md overflow-hidden">
+                <iframe
+                  src={embedUrl}
+                  title="Portfolio Video"
+                  allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+                  allowFullScreen
+                  loading="lazy"
+                  className="w-full h-full border-0"
+                />
+              </AspectRatio>
+              <p className="text-sm text-muted-foreground mt-3 text-center">
+                If the video doesn't load, <a href={embedUrl} target="_blank" rel="noreferrer" className="text-cyan-400 hover:underline">open it in a new tab</a>.
+              </p>
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       <section className="py-16 sm:py-20 bg-card/30 border-y border-border/50">
         <div className="container mx-auto px-4 sm:px-6 text-center">

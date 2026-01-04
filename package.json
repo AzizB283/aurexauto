@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
+    "generate-og": "node ./scripts/generate-og.js",
     "build": "vite build",
     "preview": "vite preview",
     "check": "tsc"
@@ -43,6 +44,7 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
     "date-fns": "^3.6.0",
+    "emailjs-com": "^3.2.0",
     "embla-carousel-react": "^8.6.0",
     "framer-motion": "^11.13.1",
     "input-otp": "^1.4.2",
@@ -74,6 +76,7 @@
     "@vitejs/plugin-react": "^4.7.0",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.47",
+    "sharp": "^0.32.6",
     "tailwindcss": "^3.4.17",
     "typescript": "5.6.3",
     "vite": "^7.3.0"

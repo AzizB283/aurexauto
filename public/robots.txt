@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://aurexauto.com/sitemap.xml

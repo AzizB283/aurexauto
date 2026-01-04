@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import Seo from "@/components/seo";
 import { Card, CardContent } from "@/components/ui/card";
 import { 
   ArrowRight,
@@ -54,6 +55,11 @@ const milestones = [
 export default function AboutPage() {
   return (
     <div>
+      <Seo
+        title={"About — AurexAuto: AI Automation for Businesses"}
+        description={"We build practical AI automation solutions focused on measurable business impact, fast delivery, and long-term partnership."}
+        pathname="/about"
+      />
       <section className="relative py-20 sm:py-24 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-[100px]" />

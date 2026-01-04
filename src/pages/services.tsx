@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import Seo from "@/components/seo";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { 
@@ -72,6 +73,19 @@ const services = [
     ],
   },
   {
+    icon: Zap,
+    title: "n8n Automation (n8n Expert)",
+    description: "Custom n8n workflows to connect tools, automate bookings, payments, and CRM syncing.",
+    features: [
+      "Custom n8n workflow development",
+      "Booking & reservation automation",
+      "CRM & payment integrations",
+      "Webhooks & trigger-based automations",
+      "Monitoring & error handling",
+    ],
+    badge: "n8n Expert",
+  },
+  {
     icon: Mail,
     title: "Email & Marketing Workflows",
     description: "Nurture, convert, retain — automatically.",
@@ -87,6 +101,11 @@ const services = [
 export default function ServicesPage() {
   return (
     <div>
+      <Seo
+        title={"AI Automation Services — Chatbots, Voice Assistants, Dashboards | AurexAuto"}
+        description={"Premium AI solutions: chatbots, voice assistants, CRM automation, and admin dashboards built to streamline operations."}
+        pathname="/services"
+      />
       <section className="relative py-20 sm:py-24 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 left-1/3 w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-[100px]" />

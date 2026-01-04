@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
+import Seo from "@/components/seo";
 import { Card, CardContent } from "@/components/ui/card";
 import { Check, ArrowRight, Wrench, Sparkles } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -71,6 +72,11 @@ const maintenanceFeatures = [
 export default function PricingPage() {
   return (
     <div>
+      <Seo
+        title={"Pricing — Simple, Transparent Automation Pricing | AurexAuto"}
+        description={"Choose a plan that fits your business — Essential, Professional, Enterprise. One-time pricing and optional maintenance plans."}
+        pathname="/pricing"
+      />
       <section className="py-12 sm:py-16 lg:py-20">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
