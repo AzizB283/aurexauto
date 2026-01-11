@@ -106,6 +106,39 @@ export default function ServicesPage() {
         description={"Premium AI solutions: chatbots, voice assistants, CRM automation, and admin dashboards built to streamline operations."}
         pathname="/services"
       />
+      <section className="py-12 sm:py-16">
+        <div className="container mx-auto px-4 sm:px-6">
+          <Card className="p-8 sm:p-12">
+            <div className="flex flex-col md:flex-row items-center gap-6">
+              <div className="flex-1">
+                <h2 className="text-2xl sm:text-3xl font-bold text-foreground">Accept bookings on your site — <span className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">chat & voice</span></h2>
+                <p className="text-muted-foreground mt-2">Embed a chat or voice bot that takes bookings in-place and an admin panel to manage staff, services and logs.</p>
+                <ul className="mt-4 space-y-2 text-sm text-foreground/90">
+                  <li className="flex items-start gap-3"><CheckCircle2 className="w-5 h-5 text-cyan-400 mt-1"/> <span className="font-medium">No redirects</span> — higher conversions</li>
+                  <li className="flex items-start gap-3"><Users className="w-5 h-5 text-cyan-400 mt-1"/> <span className="font-medium">Admin panel</span> — manage staff & services</li>
+                  <li className="flex items-start gap-3"><Globe className="w-5 h-5 text-cyan-400 mt-1"/> <span className="font-medium">Flexible ownership</span> — hosted SaaS or custom build</li>
+                </ul>
+                <div className="mt-6 flex gap-3">
+                  <Link href="/booking-bot-for-websites">
+                    <Button>Know more</Button>
+                  </Link>
+                  <Link href="/contact">
+                    <Button variant="ghost">Request demo</Button>
+                  </Link>
+                </div>
+              </div>
+
+              <div className="w-full md:w-1/3">
+                <div className="rounded-lg p-4 text-center bg-gradient-to-br from-purple-900/5 to-cyan-900/5 border border-border/40">
+                  <Bot className="w-12 h-12 mx-auto text-purple-500"/>
+                  <p className="mt-2 font-medium text-foreground">Booking bot + Admin</p>
+                  <p className="text-sm text-muted-foreground mt-1">Quick setup — embed with a snippet</p>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </div>
+      </section>
       <section className="relative py-20 sm:py-24 overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-0 left-1/3 w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-[100px]" />

@@ -12,6 +12,7 @@ import PortfolioPage from "@/pages/portfolio";
 import PricingPage from "@/pages/pricing";
 import AboutPage from "@/pages/about";
 import ContactPage from "@/pages/contact";
+import BookingBotForWebsites from "@/pages/booking-bot-for-websites";
 
 function Router() {
   return (
@@ -23,6 +24,7 @@ function Router() {
         <Route path="/pricing" component={PricingPage} />
         <Route path="/about" component={AboutPage} />
         <Route path="/contact" component={ContactPage} />
+        <Route path="/booking-bot-for-websites" component={BookingBotForWebsites} />
         <Route component={NotFound} />
       </Switch>
     </Layout>
