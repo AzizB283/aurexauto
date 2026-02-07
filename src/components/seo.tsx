@@ -36,13 +36,15 @@ export default function Seo({ title, description, pathname = "/", image = "/og-i
     upsertMetaAttr('meta[property="og:title"]', 'content', title);
     upsertMetaAttr('meta[property="og:description"]', 'content', description);
     upsertMetaAttr('meta[property="og:url"]', 'content', fullUrl);
-    upsertMetaAttr('meta[property="og:image"]', 'content', SITE_URL + image);
+    // allow absolute URLs for images (e.g. Vercel Blob); otherwise prefix SITE_URL
+    const ogImageUrl = image.startsWith('http') ? image : SITE_URL + image;
+    upsertMetaAttr('meta[property="og:image"]', 'content', ogImageUrl);
     upsertMetaAttr('meta[property="og:type"]', 'content', 'website');
 
     upsertMetaAttr('meta[name="twitter:card"]', 'content', 'summary_large_image');
     upsertMetaAttr('meta[name="twitter:title"]', 'content', title);
     upsertMetaAttr('meta[name="twitter:description"]', 'content', description);
-    upsertMetaAttr('meta[name="twitter:image"]', 'content', SITE_URL + image);
+    upsertMetaAttr('meta[name="twitter:image"]', 'content', ogImageUrl);
 
     // canonical link
     let link = document.head.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
