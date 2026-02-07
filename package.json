@@ -64,6 +64,7 @@
     "react-markdown": "^8.0.5",
     "gray-matter": "^4.0.3",
     "remark-gfm": "^3.0.1",
+    "remark-slug": "^7.0.0",
     "zod": "^3.24.2",
     "zod-validation-error": "^3.4.0"
   },
