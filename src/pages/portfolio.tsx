@@ -74,11 +74,14 @@ const metrics = [
 ];
 
 export default function PortfolioPage() {
-  const portfolioVideoSourceId = import.meta.env.VITE_PORTFOLIO_VIDEO_ID || "";
+  const envId = import.meta.env.VITE_PORTFOLIO_VIDEO_ID || "";
+  // additional video from Google Drive (provided) — this is the Dental clinic case
+  const additionalVideoId = "1-tupSJO6oUGr5j0fTmQPWlPqaGXWSkeC";
 
-  const embedUrl = portfolioVideoSourceId
-    ? `https://drive.google.com/file/d/${portfolioVideoSourceId}/preview`
-    : "";
+  const portfolioVideos = [
+    ...(envId ? [{ id: envId, title: "Salon Booking Assistant" }] : []),
+    { id: additionalVideoId, title: "Dental Appointment Bot" },
+  ];
   return (
     <div>
       <Seo
@@ -167,24 +170,32 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {portfolioVideoSourceId ? (
+      {portfolioVideos.length > 0 ? (
         <section className="py-12">
           <div className="container mx-auto px-4 sm:px-6">
-            <h3 className="text-2xl font-bold mb-4 text-center">Featured Video</h3>
-            <div className="max-w-4xl mx-auto">
-              <AspectRatio className="w-full rounded-md overflow-hidden">
-                <iframe
-                  src={embedUrl}
-                  title="Portfolio Video"
-                  allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
-                  allowFullScreen
-                  loading="lazy"
-                  className="w-full h-full border-0"
-                />
-              </AspectRatio>
-              <p className="text-sm text-muted-foreground mt-3 text-center">
-                If the video doesn't load, <a href={embedUrl} target="_blank" rel="noreferrer" className="text-cyan-400 hover:underline">open it in a new tab</a>.
-              </p>
+            <h3 className="text-2xl font-bold mb-6 text-center">Featured Videos</h3>
+            <div className="max-w-6xl mx-auto space-y-6">
+              {portfolioVideos.map((v) => {
+                const url = `https://drive.google.com/file/d/${v.id}/preview`;
+                return (
+                  <div key={v.id} className="w-full">
+                    <h4 className="text-lg font-semibold mb-2">{v.title}</h4>
+                    <AspectRatio ratio={16 / 9} className="w-full rounded-md overflow-hidden">
+                      <iframe
+                        src={url}
+                        title={v.title}
+                        allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
+                        allowFullScreen
+                        loading="lazy"
+                        className="w-full h-full border-0"
+                      />
+                    </AspectRatio>
+                    <p className="text-sm text-muted-foreground mt-3">
+                      If the video doesn't load, <a href={url} target="_blank" rel="noreferrer" className="text-cyan-400 hover:underline">open it in a new tab</a>.
+                    </p>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>
