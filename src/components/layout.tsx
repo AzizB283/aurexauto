@@ -39,10 +39,8 @@ function Header() {
       <div className="container mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-2" data-testid="link-header-logo">
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-cyan-400 flex items-center justify-center">
-              <Zap className="w-4 h-4 text-white" />
-            </div>
-            <span className="font-bold text-lg">AurexAuto</span>
+            <img src="/Aurex_auto.png" alt="Aurex Auto" className="w-10 h-10 object-contain" />
+            <span className="font-bold text-lg hidden sm:inline">Aurex Auto</span>
           </Link>
 
           <nav className="hidden lg:flex items-center gap-1">
