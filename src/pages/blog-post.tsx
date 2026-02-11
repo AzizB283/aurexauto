@@ -3,6 +3,7 @@ import { useRoute } from "wouter";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import remarkSlug from "remark-slug";
+import rehypeRaw from "rehype-raw";
 import Seo from "@/components/seo";
 import { getPostBySlug } from "@/lib/posts";
 
@@ -39,7 +40,9 @@ export default function BlogPost() {
         </header>
 
         <div className="prose prose-invert prose-lg max-w-none">
-          <ReactMarkdown remarkPlugins={[remarkGfm, remarkSlug]}>{post.content}</ReactMarkdown>
+          <ReactMarkdown remarkPlugins={[remarkGfm, remarkSlug]} rehypePlugins={[rehypeRaw]}>
+            {post.content}
+          </ReactMarkdown>
         </div>
       </article>
     </div>
