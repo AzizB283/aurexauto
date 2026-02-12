@@ -76,7 +76,7 @@ const metrics = [
 export default function PortfolioPage() {
   const envId = import.meta.env.VITE_PORTFOLIO_VIDEO_ID || "";
   // additional video from Google Drive (provided) — this is the Dental clinic case
-  const additionalVideoId = "1-tupSJO6oUGr5j0fTmQPWlPqaGXWSkeC";
+  const additionalVideoId = "13i2qpAUZkec5F_f2pYG489zawi_qgjBr";
 
   const portfolioVideos = [
     ...(envId ? [{ id: envId, title: "Salon Booking Assistant" }] : []),
