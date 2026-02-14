@@ -41,7 +41,7 @@ To see the AI receptionist in action, watch the full demo here:
 **Demo Video:**
 
 <div style="position:relative;padding-bottom:56.25%;height:0;">
-   <iframe src="https://drive.google.com/file/d/1-tupSJO6oUGr5j0fTmQPWlPqaGXWSkeC/preview" title="Clinic AI Receptionist Demo" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+   <iframe src="https://drive.google.com/file/d/13i2qpAUZkec5F_f2pYG489zawi_qgjBr/preview" title="Clinic AI Receptionist Demo" style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>
 </div>
 
 This video walkthrough demonstrates:
@@ -157,6 +157,4 @@ As patient volume grows, your scheduling process stays efficient without needing
 The future of clinic operations is intelligent, automated, and patient-centric. By adopting our AI receptionist, clinics can transform the way they manage appointments - improving efficiency, reducing front-desk burden, and delivering a modern scheduling experience that patients expect.
 
 Watch the demo, explore the dashboards, and see for yourself how automation can elevate your clinic's workflow.
-
----
 

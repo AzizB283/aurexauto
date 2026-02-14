@@ -70,3 +70,48 @@ export function getPostBySlug(slug: string): Post | undefined {
 export function getAllSlugs(): string[] {
   return getAllPosts().map((p) => p.slug);
 }
+
+export type PostCategory = 'general' | 'clinic';
+
+const CLINIC_KEYWORDS = ['clinic', 'healthcare', 'medical', 'appointment', 'patient', 'receptionist', 'doctor', 'scheduling'];
+
+export function categorizePost(post: Post): PostCategory {
+  const tags = (post.meta.tags || []).join(' ').toLowerCase();
+  const hasClinicKeyword = CLINIC_KEYWORDS.some(keyword => tags.includes(keyword));
+  return hasClinicKeyword ? 'clinic' : 'general';
+}
+
+export function getCategories(): { label: string; value: PostCategory }[] {
+  return [
+    { label: 'General', value: 'general' },
+    { label: 'Clinic & Medical', value: 'clinic' },
+  ];
+}
+
+export interface PaginationResult {
+  posts: Post[];
+  total: number;
+  totalPages: number;
+  currentPage: number;
+}
+
+export function getPaginatedPosts(
+  page: number = 1,
+  perPage: number = 10,
+  category?: PostCategory
+): PaginationResult {
+  let allPosts = getAllPosts();
+  
+  // Filter by category if provided
+  if (category) {
+    allPosts = allPosts.filter((post) => categorizePost(post) === category);
+  }
+  
+  const total = allPosts.length;
+  const totalPages = Math.ceil(total / perPage);
+  const currentPage = Math.min(Math.max(1, page), totalPages || 1);
+  const start = (currentPage - 1) * perPage;
+  const posts = allPosts.slice(start, start + perPage);
+  
+  return { posts, total, totalPages, currentPage };
+}
