@@ -118,9 +118,7 @@ function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           <div>
             <Link href="/" className="flex items-center gap-2 mb-4" data-testid="link-footer-logo">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-cyan-400 flex items-center justify-center">
-                <Zap className="w-4 h-4 text-white" />
-              </div>
+              <img src="/Aurex_auto.png" alt="Aurex Auto" className="w-8 h-8 object-contain" />
               <span className="font-bold text-lg">AurexAuto</span>
             </Link>
             <p className="text-muted-foreground text-sm leading-relaxed">
