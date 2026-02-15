@@ -3,8 +3,8 @@ import path from "path";
 import sharp from "sharp";
 
 const root = path.resolve();
-const svgPath = path.join(root, "public", "favicon.svg");
-const outPath = path.join(root, "public", "og-image.png");
+const svgPath = path.join(root, "public", "Aurex_auto.png");
+const outPath = path.join(root, "public", "Aurex_auto.png");
 
 async function run() {
   if (!fs.existsSync(svgPath)) {

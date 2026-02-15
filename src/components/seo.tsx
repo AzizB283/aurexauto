@@ -27,7 +27,7 @@ function upsertMetaAttr(selector: string, attr: string, value: string) {
   }
 }
 
-export default function Seo({ title, description, pathname = "/", image = "/og-image.png", canonical }: SeoProps) {
+export default function Seo({ title, description, pathname = "/", image = "/Aurex_auto.png", canonical }: SeoProps) {
   useEffect(() => {
     const fullUrl = canonical || (SITE_URL + pathname);
     document.title = title;
